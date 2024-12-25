@@ -1,0 +1,64 @@
+package main
+
+import (
+	"fmt"
+	"math"
+	"time"
+)
+
+func main() {
+	var n, pilih int
+	var rekursif, iteratif int
+	fmt.Print("Masukkan Angka Positif sebagai batas atas: ")
+	fmt.Scan(&n)
+	fmt.Println("1. Rekursif")
+	fmt.Println("2. Iteratif")
+	fmt.Print("Pilih algoritma: ")
+	fmt.Scan(&pilih)
+	if pilih == 1 {
+		for i := 0; i <= n; i++ {
+			mulai := time.Now()
+			rekursif = sumKuadrat_rekursif(i)
+			fmt.Println("Rekursif:", rekursif)
+			fmt.Println(time.Since(mulai))
+		}
+	} else if pilih == 2 {
+		for i := 0; i <= n; i++ {
+			mulai := time.Now()
+			iteratif = sumKuadrat_iteratif(i)
+			fmt.Println("Iteratif:", iteratif)
+			fmt.Println(time.Since(mulai))
+		}
+	}
+}
+
+// Fungsi iteratif untuk menghitung jumlah kuadrat sempurna <= n
+func sumKuadrat_iteratif(n int) int {
+	var i, total int
+	var x float64
+	//akar dari n akan diubah menjadi floor(dibulatkan ke bawah)
+	x = math.Floor(math.Sqrt(float64(n)))
+	total = 0
+	i = 0
+	//iterasinya hanya sampai x(floor dari akar n)
+	for i <= int(x) {
+		//menjumlahkan kuadrat dari i secara berulang
+		total = total + int(math.Pow(float64(i), 2))
+		i++
+	}
+	return total
+}
+
+// Fungsi rekursif untuk menghitung jumlah kuadrat sempurna <= n
+func sumKuadrat_rekursif(n int) int {
+	if n < 0 {
+		return 0
+	}
+	// Periksa apakah n adalah kuadrat sempurna
+	root := int(math.Sqrt(float64(n)))
+	if root*root == n {
+		return n + sumKuadrat_rekursif(n-1)
+	}
+	// Jika bukan kuadrat sempurna, lanjutkan ke bilangan sebelumnya
+	return sumKuadrat_rekursif(n - 1)
+}
