@@ -19,14 +19,14 @@ func main() {
 		for i := 0; i <= n; i++ {
 			mulai := time.Now()
 			rekursif = sumKuadrat_rekursif(i)
-			fmt.Println("Rekursif:", rekursif)
+			fmt.Println(i, ": ", rekursif)
 			fmt.Println(time.Since(mulai))
 		}
 	} else if pilih == 2 {
 		for i := 0; i <= n; i++ {
 			mulai := time.Now()
 			iteratif = sumKuadrat_iteratif(i)
-			fmt.Println("Iteratif:", iteratif)
+			fmt.Println(i, ": ", iteratif)
 			fmt.Println(time.Since(mulai))
 		}
 	}
